@@ -10,7 +10,7 @@ pkgdesc="intrusion detection system"
 arch=('i686' 'x86_64')
 url="https://github.com/Tripwire/tripwire-open-source"
 license=('GPL')
-depends=('openssl-1.1')
+depends=('openssl-static')
 optdepends=('lynis')
 makedepends=('git' 'automake')
 provides=('tripwire')
@@ -43,7 +43,7 @@ prepare() {
 }
 build() {
   cd ${_name}
-  make -j4
+  make CXXFLAGS="-static -static-libstdc++ -std=c++14" -j4
 }
 
 package () {
